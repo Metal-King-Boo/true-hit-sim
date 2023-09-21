@@ -1,16 +1,18 @@
 #include <iostream>
-#include <string>
 
 // defines shared properties of base classes
 // growth rates, critical/accuracy bonuses, movement
 // the option to set or receive these values for level ups and specific classes
 class BaseClass {
+    // growths represents the 6 stats found in ALL Fire Emblem games
+    // hp, atk/mag, skl, spd, lck, res
     int growths[6];
-    bool crit_bonus;
-    bool acc_bonus;
 
     public: 
-        void set_growths(int *arr, unsigned int);
+        int crit_bonus;
+        bool acc_bonus;
+
+        void set_growths(int *arr, unsigned int x);
         int* get_growths();
         void display();
 };
@@ -25,9 +27,10 @@ class Myrmidon : private BaseClass{
         static int FS_CRIT_BONUS;
 
     public:
-        // used to change the crit bonus boolean to on/off
-        void turn_crit_bonus();
-        int get_crit_bonus(unsigned int);
+        // used to set the crit bonus for a specific game
+        void set_crit_bonus(unsigned int x);
+        // used to return the crit bonus for a specific game
+        int get_crit_bonus();
 
 };
 
