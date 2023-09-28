@@ -3,6 +3,7 @@
 #include <time.h>
 
 // weapon level is important (especially S)
+// might need a selector function to run a specific one of these functions based on game
 
 /*
    term index
@@ -31,31 +32,6 @@
    ABSENT
 */
 
-//Myrmidon Ayra;
-//Mercenary Scathach;
-
-/* 
-   crit formula for binding blade
-   (skl/2) + (wpn_bonus) + (supp_bonus) + (class_bonus)
-
-   dodge formula for binding blade
-   (lck/2) + (supp_bonus)
-*/
-
-//Myrmidon Rutger;
-//Mercenary Echidna;
-
-/*
-   crit formula for blazing blade
-   (skl/2) + (wpn_bonus) + (supp_bonus) + (class_bonus) + (s_level_bonus)
-
-   dodge formula for blazing blade
-   (lck) + (supp_bonus) + (tactician_bonus)
-*/
-
-//Myrmidon Guy;
-//Mercenary Raven;
-
 /*
    crit formula for fates
    (wpn_bonus) + [(skl - 4) / 2] + (dual_pair_bonus) + (skl_bonus) + (class_bonus)
@@ -77,4 +53,33 @@ int randNum() {
     // random number between 0 and 99 is picked and returned
     int number = rand() % 100;
     return number;
+}
+
+// functions used to calculate critical chance based on game
+
+// this function is used for binding blade crit chance
+int critChance(int skl_stat, int class_bonus, int wpn_bonus, int supp_bonus) {
+    int total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus + class_bonus;
+    return total_crit;
+}
+
+// this function is used for blazing sword crit chance
+int critChance(int skl_stat, int class_bonus, int wpn_bonus, int supp_bonus, int s_level_bonus) {
+    int total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus + class_bonus + s_level_bonus;
+    return total_crit;
+}
+
+// functions used to calculate the dodge chance based on game
+// remember this is not for evading an attack but for lowering the opponent's critical chance
+
+// this function is used for binding blade dodge chance
+int dodgeChance(int lck_stat, int supp_bonus) {
+    int total_dodge = (lck_stat / 2) + supp_bonus;
+    return total_dodge;
+}
+
+// this function is used for blazing sword dodge chance
+int dodgeChance(int lck_stat, int supp_bonus, int tactician_bonus) {
+    int total_dodge = lck_stat + supp_bonus + tactician_bonus;
+    return total_dodge;
 }
