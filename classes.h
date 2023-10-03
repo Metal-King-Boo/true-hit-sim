@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 // defines shared properties of base classes
 // growth rates, critical/accuracy bonuses, movement
@@ -7,6 +8,8 @@ class BaseClass {
     // growths represents the 6 stats found in ALL Fire Emblem games
     // hp, atk/mag, skl, spd, lck, res
     int growths[6];
+    // this describes unit type (armor, horse, flier, infantry, etc.)
+    std::string type;
 
     public: 
         int crit_bonus;
@@ -14,6 +17,8 @@ class BaseClass {
 
         void set_growths(int *arr, unsigned int x);
         int* get_growths();
+        void set_type(std::string y);
+        std::string get_type();
         void display();
 };
 

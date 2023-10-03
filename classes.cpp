@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "classes.h"
 
 // declarations used in BaseClass
@@ -17,6 +18,12 @@ int* BaseClass::get_growths(){
    return growths;
 }
 
+// function to set the unit type of a class
+void BaseClass::set_type(std::string y){
+   // simply sets the value to a string name
+   type = y;
+}
+
 // testing function to display all information about a class
 void BaseClass::display(){
    // this is a test function to see if the information is correct
@@ -24,6 +31,7 @@ void BaseClass::display(){
    std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "\n";
    std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "\n";
    std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "\n\n";
+   std::cout << "Unit Type: " << type << "\n\n";
 }
 
 // declarations used in Myrmidon

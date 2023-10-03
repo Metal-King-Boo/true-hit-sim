@@ -53,6 +53,25 @@ int Weapon::get_weapon_accuracy(){
     return weapon_accuracy;
 }
 
+// function that sets the weapon's triangle position
+void Weapon::set_weapon_triangle(char triangle){
+    weapon_triangle = triangle;
+}
+
+// function that returns the weapon's triangle position
+char Weapon::get_weapon_triangle(){
+    return weapon_triangle;
+}
+
+// function that sets the weapon's unit effectiveness
+void Weapon::set_weapon_effective(std::string effective){
+    weapon_effective = effective;
+}
+// function that returns the weapon's unit effectiveness
+std::string Weapon::get_weapon_effective(){
+    return weapon_effective;
+}
+
 // function that sets any bonus stats a weapon has
 void Weapon::set_bonus_stats(int *arr, unsigned int x){
     // iterates through arr to match up with the standard stat order

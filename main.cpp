@@ -14,7 +14,14 @@
 */
 
 // to start i need i/o functionality for copious amounts of data
-// then i can move on to creating the GUI version utilzing this module
+// then i can move on to creating the GUI version utilizing this module
+
+struct Unit {
+    Character character;
+    BaseClass base;
+    Weapon weapon;
+    int game;
+};
 
 struct Myrmid {
     Character character;
@@ -30,9 +37,56 @@ struct Merc {
     int game;
 };
 
+// need a function to set the values of the character, class, weapon, and game for every struct created
+
+// functions used to select which game's crit formula to use
+int critSelect(Unit *unit) {
+    int crit_chance;
+
+    // switch case to get the particular game
+    switch (unit->game)
+    {
+    // use case for FE6
+    case 5:
+        crit_chance = critChance(12, 0, 30, 0);
+        break;
+    // use case for FE7
+    case 6:
+        crit_chance = critChance(7, 15, 30, 0, 0);
+        break;
+    default:
+        break;
+    }
+
+    return crit_chance;
+}
+
+// functions used to select which game's dodge formula to use
+int dodgeSelect(Unit *unit) {
+    int dodge_chance;
+
+    // switch case to get the particular game
+    switch (unit->game)
+    {
+    // use case for FE6
+    case 5:
+        dodge_chance = dodgeChance(3, 0);
+        break;
+    // use case for FE7    
+    case 6:
+        dodge_chance = dodgeChance(12, 0, 0);
+        break;
+    default:
+        break;
+    }
+
+    return dodge_chance;
+};
+
 int main() {
     Myrmid rutger;
     Merc echidna;
+    Unit raven;
     int rng = randNum();
     
     return 0;
