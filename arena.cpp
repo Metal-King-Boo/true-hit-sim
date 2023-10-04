@@ -6,7 +6,6 @@
 // weapon level is important (especially S)
 // might need a selector function to run a specific one of these functions based on game
 // reaver weapons and light brand may make this weird
-// need functions for getting the crit bool, weapon tri int, and eff bonus bool
 
 /*
    term index
@@ -65,13 +64,46 @@ int randNum() {
     return number;
 }
 
+// functions used to check if the attack will connect
+// this one is used for games with the true hit system
+bool trueHitCheck(int battle_hit_rate) {
+    int seed;
+
+    seed = (randNum() + randNum()) / 2;
+
+    // from 0-99 it checks if the value is larger than the battle_hit_rate
+    // if it is then the attack did not connect, if not then it did 
+    if(seed > battle_hit_rate) {
+        return false;
+    } else {
+        return true;
+    }
+    
+}
+
+// this one is used for games with the old accuracy system
+bool hitCheck(int battle_hit_rate) {
+    int seed;
+
+    seed = randNum();
+
+    // from 0-99 it checks if the value is larger than the battle_hit_rate
+    // if it is then the attack did not connect, if not then it did 
+    if(seed > battle_hit_rate) {
+        return false;
+    } else {
+        return true;
+    }
+    
+}
+
 // function used to check if the attack will be a critical hit
 bool criticalCheck(int crit_rate) {
     int seed;
     seed = randNum();
 
     // from 0-99 it checks if the value is larger than the crit_rate
-    // if it is then the attack did not crit, if not then it did crit
+    // if it is then the attack did not crit, if not then it did
     if(seed > crit_rate){
         return false;
     } else {
