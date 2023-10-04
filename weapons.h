@@ -13,7 +13,7 @@ class Weapon {
     // W beats T, T beats F, F beats W, and L/D beat W/T/F (Jugdral)
     // W = Wind Tomes, T = Thunder Tomes, F = Fire Tomes (Jugdral and Tellius)
     // A = Anima Tomes, L = Light Tomes, and D = Dark Tomes (GBA and Radiant Dawn)
-    // A beats L, L beats D, and D beats (GBA)
+    // A beats L, L beats D, and D beats A (GBA)
     char weapon_triangle;
     std::string weapon_effective;
 

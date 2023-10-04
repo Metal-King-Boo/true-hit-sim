@@ -24,6 +24,21 @@ void BaseClass::set_type(std::string y){
    type = y;
 }
 
+// function to return the type of a class
+std::string BaseClass::get_type(){
+   return type;
+}
+
+// function to set the race of a class
+void BaseClass::set_race(std::string y){
+   race = y;
+}
+
+// function used to return the race of a class
+std::string BaseClass::get_race(){
+   return race;
+}
+
 // testing function to display all information about a class
 void BaseClass::display(){
    // this is a test function to see if the information is correct

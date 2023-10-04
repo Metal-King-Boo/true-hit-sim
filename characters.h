@@ -3,8 +3,8 @@
 #include "classes.h"
 
 class Character {
-    int stats[6];
-    int growths[6];
+    int stats[7];
+    int growths[7];
     int level;
     public:
         void set_stats(int* arr, unsigned int x);

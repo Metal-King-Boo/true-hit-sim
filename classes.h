@@ -5,11 +5,12 @@
 // growth rates, critical/accuracy bonuses, movement
 // the option to set or receive these values for level ups and specific classes
 class BaseClass {
-    // growths represents the 6 stats found in ALL Fire Emblem games
-    // hp, atk/mag, skl, spd, lck, res
-    int growths[6];
+    // growths represents the 7 stats found in ALL Fire Emblem games
+    // hp, atk/mag, skl, spd, lck, res, con
+    int growths[7];
     // this describes unit type (armor, horse, flier, infantry, etc.)
     std::string type;
+    std::string race;
 
     public: 
         int crit_bonus;
@@ -19,6 +20,8 @@ class BaseClass {
         int* get_growths();
         void set_type(std::string y);
         std::string get_type();
+        void set_race(std::string y);
+        std::string get_race();
         void display();
 };
 
