@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#pragma once
 
 // defines shared properties of base classes
 // growth rates, critical/accuracy bonuses, movement
@@ -27,7 +28,7 @@ class BaseClass {
 
 // the speed type swordsman class 
 // features the bonuses it has in the games relevant to comparison
-class Myrmidon : private BaseClass{
+class Myrmidon : public BaseClass{
     private:
         // 30 for binding, 15 for blazing, 10 for fates
         static int BB_CRIT_BONUS;
@@ -42,7 +43,7 @@ class Myrmidon : private BaseClass{
 
 };
 
-class Mercenary : private BaseClass{
+class Mercenary : public BaseClass{
     private:
 
     public:

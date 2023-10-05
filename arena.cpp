@@ -56,9 +56,6 @@
 
 // function used to produce a random number between 0 and 99
 int randNum() {
-    // the random number seed is generated based on the current time
-    srand(time(0));
-    
     // random number between 0 and 99 is picked and returned
     int number = rand() % 100;
     return number;
@@ -185,6 +182,7 @@ int weaponTriangle(char weapon_one, char weapon_two) {
         }
     }
 
+    return 2;
 }
 
 // function used to check the weapon effectiveness

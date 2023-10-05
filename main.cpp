@@ -1,9 +1,13 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <time.h>
+
 #include "classes.h"
 #include "characters.h"
 #include "weapons.h"
 #include "arena.cpp"
+
 
 /*
     Values used for the game int, to represent which game structure is being used
@@ -84,10 +88,15 @@ int dodgeSelect(Unit *unit) {
 };
 
 int main() {
-    Myrmid rutger;
-    Merc echidna;
-    Unit raven;
+    // the random number seed is generated based on the current time
+    srand(time(0));
     int rng = randNum();
     
+    for(int i = 0; i < 5; i++){
+        std::cout << attack(20, 30, 1, 1, 0) << " ";
+    }
+
+    std::cout << "\n\n";
+
     return 0;
 }
