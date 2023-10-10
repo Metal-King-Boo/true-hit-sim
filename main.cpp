@@ -24,10 +24,11 @@ struct Unit {
     Character character;
     BaseClass base;
     Weapon weapon;
+    std::string name;
     int game;
 };
 
-struct Myrmid {
+/*struct Myrmid {
     Character character;
     Myrmidon myrmidon;
     Weapon weapon;
@@ -39,7 +40,7 @@ struct Merc {
     Mercenary mercenary;
     Weapon weapon;
     int game;
-};
+};*/
 
 // need a function to set the values of the character, class, weapon, and game for every struct created
 
@@ -56,7 +57,7 @@ int critSelect(Unit *unit) {
         break;
     // use case for FE7
     case 6:
-        crit_chance = critChance(7, 15, 30, 0, 0);
+        //crit_chance = critChance(7, 15, 30, 0, 0);
         break;
     default:
         break;
@@ -78,7 +79,7 @@ int dodgeSelect(Unit *unit) {
         break;
     // use case for FE7    
     case 6:
-        dodge_chance = dodgeChance(12, 0, 0);
+        //dodge_chance = dodgeChance(12, 0, 0);
         break;
     default:
         break;
@@ -91,12 +92,16 @@ int main() {
     // the random number seed is generated based on the current time
     srand(time(0));
     int rng = randNum();
+    Unit echidna;
     
-    for(int i = 0; i < 5; i++){
+    int arr[6] = {randNum(), randNum(), randNum(), randNum(), randNum(), randNum()};
+    int arr2[7] = {randNum(), randNum(), randNum(), randNum(), randNum(), randNum(), randNum()};
+
+    /*for(int i = 0; i < 5; i++){
         std::cout << attack(20, 30, 1, 1, 0) << " ";
     }
 
-    std::cout << "\n\n";
+    std::cout << "\n\n";*/
 
     return 0;
 }

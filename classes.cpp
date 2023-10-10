@@ -40,14 +40,25 @@ std::string BaseClass::get_race(){
    return race;
 }
 
+// function to set the name of a class
+void BaseClass::set_name(std::string y){
+   name = y;
+}
+
+// function used to return the name of a class
+std::string BaseClass::get_name(){
+   return name;
+}
+
 // testing function to display all information about a class
 void BaseClass::display(){
    // this is a test function to see if the information is correct
-   std::cout << "These are the growth rates for BaseClass: \n";
-   std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "\n";
-   std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "\n";
-   std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "\n\n";
-   std::cout << "Unit Type: " << type << "\n\n";
+   std::cout << name << " Statistics: \n";
+   std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
+   std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
+   std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n\n";
+   std::cout << "CON - " << growths[6] << "%\n\n";
+   std::cout << "Type: " << type << "\t Race: " << race << "\n\n";
 }
 
 // declarations used in Myrmidon

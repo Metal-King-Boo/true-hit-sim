@@ -37,3 +37,19 @@ void Character::set_level(unsigned int x){
 int Character::get_level(){
     return level;
 }
+
+void Character::display(){
+    std::cout << "Level: " << level << "\n";
+    std::cout << "Character Statistics:\n";
+    std::cout << "Stats: \n";
+    std::cout << "HP - " << stats[0] << "         SPD - " << stats[3] << "\n";
+    std::cout << "ATK/MAG - " << stats[1] << "    LCK - " << stats[4] << "\n";
+    std::cout << "SKL/DEX - " << stats[2] << "    RES - " << stats[5] << "\n";
+    std::cout << "CON - " << stats[6] << "\n";
+
+    std::cout << "Character Growths:\n";
+    std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
+    std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
+    std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n\n";
+    std::cout << "CON - " << growths[6] << "%\n\n";
+}

@@ -1,8 +1,11 @@
 #include <iostream>
+#include <string>
 
 class Weapon {
+    std::string weapon_name;
     int weapon_might;
     int weapon_weight;
+    int weapon_range[2];
     int weapon_kills;
     int weapon_crit;
     int weapon_accuracy;
@@ -21,23 +24,31 @@ class Weapon {
     // this is seen a lot in FE14 but other weapons like the holy weapons in FE4 have them
     // Array Elements:  0 = HP, 1 = STR/MAG, 2 = SKL, 3 = SPD, 4 = LCK, 5 = RES 
     int bonus_stats[6];
+    bool brave;
 
     public:
+        void set_name(std::string y);
         void set_weapon_might(unsigned int x);
         void set_weapon_weight(unsigned int x);
+        void set_range(unsigned int x, unsigned int y);
         void set_weapon_kills(unsigned int x);
         void set_weapon_crit(unsigned int x);
         void set_weapon_accuracy(unsigned int x);
         void set_weapon_triangle(char triangle);
         void set_weapon_effective(std::string effective);
         void set_bonus_stats(int *arr, unsigned int x);
+        void set_brave(bool hero);
+        void display();
         
+        std::string get_name();
         int get_weapon_might();
         int get_weapon_weight();
+        int* get_range();
         int get_weapon_kills();
         int get_weapon_crit();
         int get_weapon_accuracy();
         char get_weapon_triangle();
         std::string get_weapon_effective();
         int* get_bonus_stats();
+        bool get_brave();
 };

@@ -10,6 +10,7 @@ class Character {
         void set_stats(int* arr, unsigned int x);
         void set_growths(int* arr, unsigned int x);
         void set_level(unsigned int x);
+        void display();
 
         int* get_stats();
         int* get_growths();

@@ -12,6 +12,7 @@ class BaseClass {
     // this describes unit type (armor, horse, flier, infantry, etc.)
     std::string type;
     std::string race;
+    std::string name;
 
     public: 
         int crit_bonus;
@@ -23,6 +24,8 @@ class BaseClass {
         std::string get_type();
         void set_race(std::string y);
         std::string get_race();
+        void set_name(std::string y);
+        std::string get_name();
         void display();
 };
 

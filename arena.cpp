@@ -334,7 +334,7 @@ int attackSpeed(int spd_stat, int wpn_weight, int con_stat) {
 }
 
 // -------------------- BLAZING SWORD FUNCTIONS --------------------
-
+/*
 // this function is used for blazing sword attacks
 int attack(int atk_stat, int wpn_might, int wpn_tri_bonus, int eff_bonus, int supp_bonus) {
     int total_attack;
@@ -352,4 +352,4 @@ int critChance(int skl_stat, int class_bonus, int wpn_bonus, int supp_bonus, int
 int dodgeChance(int lck_stat, int supp_bonus, int tactician_bonus) {
     int total_dodge = lck_stat + supp_bonus + tactician_bonus;
     return total_dodge;
-}
+}*/
