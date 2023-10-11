@@ -209,33 +209,31 @@ int attack(int atk_stat, int wpn_might, int wpn_tri_bonus, bool eff_bonus, int s
     
     // if statements for tri advantage and effective bonus
     // if both are true
-    if(wpn_tri_bonus == 1 || eff_bonus == true){
+    if(wpn_tri_bonus == 1 && eff_bonus == true){
         total_attack = atk_stat + ((wpn_might + 1) * 3) + supp_bonus;
     } 
     // if tri advantage is true and eff is false
-    if(wpn_tri_bonus == 1 || eff_bonus == false){
+    if(wpn_tri_bonus == 1 && eff_bonus == false){
         total_attack = atk_stat + ((wpn_might + 1) * 1) + supp_bonus;
     } 
-
     // if tri advantage is neutral and eff is true
-    if(wpn_tri_bonus == 2 || eff_bonus == true){
+    if(wpn_tri_bonus == 2 && eff_bonus == true){
         total_attack = atk_stat + ((wpn_might) * 3) + supp_bonus;
     } 
     // if tri advantage is neutral and eff is false
-    if(wpn_tri_bonus == 2 || eff_bonus == false){
+    if(wpn_tri_bonus == 2 && eff_bonus == false){
         total_attack = atk_stat + ((wpn_might) * 1) + supp_bonus;
     } 
-    
     // if tri advantage is false and eff is true
-    if(wpn_tri_bonus == 3 || eff_bonus == true){
+    if(wpn_tri_bonus == 3 && eff_bonus == true){
         total_attack = atk_stat + ((wpn_might - 1) * 3) + supp_bonus;
     } 
     // if tri advantage is false and eff is false
-    if(wpn_tri_bonus == 3 || eff_bonus == false){
+    if(wpn_tri_bonus == 3 && eff_bonus == false){
         total_attack = atk_stat + ((wpn_might - 1) * 1) + supp_bonus;
     } 
 
-    total_attack = atk_stat + ((wpn_might + wpn_tri_bonus) * eff_bonus) + supp_bonus;
+    //total_attack = atk_stat + ((wpn_might + wpn_tri_bonus) * eff_bonus) + supp_bonus;
     return total_attack;
 }
 
@@ -267,12 +265,14 @@ int damage(bool critical, int total_attack, int total_defense){
 
 // this function is used for binding blade crit chance
 int critChance(int skl_stat, int class_bonus, int wpn_bonus, int supp_bonus) {
+    // this calculation rounds down
     int total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus + class_bonus;
     return total_crit;
 }
 
 // this function is used for binding blade dodge chance
 int dodgeChance(int lck_stat, int supp_bonus) {
+    // this calculation rounds down
     int total_dodge = (lck_stat / 2) + supp_bonus;
     return total_dodge;
 }
@@ -281,6 +281,7 @@ int dodgeChance(int lck_stat, int supp_bonus) {
 int accuracy(int wpn_hit, int skl_stat, int lck_stat, int wpn_tri_bonus, int supp_bonus) {
     int total_accuracy;
 
+    // this calculation rounds down
     total_accuracy = wpn_hit + (skl_stat / 2) + (lck_stat / 2) + supp_bonus;
 
     // if triangle advantage
@@ -298,12 +299,15 @@ int accuracy(int wpn_hit, int skl_stat, int lck_stat, int wpn_tri_bonus, int sup
 // this function is used for binding blade avoid
 int avoid(int total_attack_speed, int lck_stat, int supp_bonus, int terrain_bonus) {
     int total_avoid;
+
     total_avoid = (total_attack_speed * 2) + lck_stat + supp_bonus + terrain_bonus;
+
     return total_avoid;
 }
 // this function is used for binding blade battle accuracy
 int battleAccuracy(int total_accuracy, int total_avoid) {
     int battle_accuracy;
+    
     battle_accuracy = total_accuracy - total_avoid;
     
     // prevention of getting negative numbers
