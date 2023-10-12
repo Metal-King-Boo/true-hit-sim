@@ -8,7 +8,6 @@
 #include "weapons.h"
 #include "arena.cpp"
 
-
 /*
     Values used for the game int, to represent which game structure is being used
     0 = FE1    4 = FE5    8 = FE9    12 = FE13   16 = FE17
@@ -26,6 +25,7 @@ struct Unit {
     Weapon weapon;
     std::string name;
     int game;
+    int current_hp;
 };
 
 /*struct Myrmid {
@@ -53,7 +53,7 @@ int critSelect(Unit *unit) {
     {
     // use case for FE6
     case 5:
-        crit_chance = critChance(12, 0, 30, 0);
+        crit_chance = critChance(12, 30, 0, unit->base.get_name());
         break;
     // use case for FE7
     case 6:

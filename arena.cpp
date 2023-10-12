@@ -264,9 +264,17 @@ int damage(bool critical, int total_attack, int total_defense){
 }
 
 // this function is used for binding blade crit chance
-int critChance(int skl_stat, int class_bonus, int wpn_bonus, int supp_bonus) {
-    // this calculation rounds down
-    int total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus + class_bonus;
+int critChance(int skl_stat, int wpn_bonus, int supp_bonus, std::string class_name) {
+    int total_crit;
+
+    // class bonus for critical hits
+    if(class_name == "Berserker" || class_name == "Swordmaster"){
+        // this calculation rounds down
+        total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus + 30;
+    } else{
+        total_crit = (skl_stat / 2) + wpn_bonus + supp_bonus;
+    }
+    
     return total_crit;
 }
 
