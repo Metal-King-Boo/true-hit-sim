@@ -2,6 +2,9 @@
 #include <string>
 #include "classes.h"
 
+// defines the shared properties of all characters found in the game
+// stats, growth rates, and level
+// features the option to set or receive these values for combat and level ups
 class Character {
     int stats[7];
     int growths[7];

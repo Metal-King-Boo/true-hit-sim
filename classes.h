@@ -2,36 +2,33 @@
 #include <string>
 #pragma once
 
-// defines shared properties of base classes
-// growth rates, critical/accuracy bonuses, movement
-// the option to set or receive these values for level ups and specific classes
+// defines the shared properties of all base classes found in the game
+// growth rates, movement type, class race, and class name
+// features the option to set or receive these values for combat and level ups
 class BaseClass {
-    // growths represents the 7 stats found in ALL Fire Emblem games
-    // hp, atk/mag, skl, spd, lck, res, con
     int growths[7];
-    // this describes unit type (armor, horse, flier, infantry, etc.)
     std::string type;
     std::string race;
     std::string name;
-
     public: 
-        int crit_bonus;
-        bool acc_bonus;
-
         void set_growths(int *arr, unsigned int x);
-        int* get_growths();
         void set_type(std::string y);
-        std::string get_type();
         void set_race(std::string y);
-        std::string get_race();
         void set_name(std::string y);
-        std::string get_name();
         void display();
+
+        int* get_growths();
+        std::string get_type();
+        std::string get_race();
+        std::string get_name();
 };
 
+
+// UNUSED FEATURE
+// CLASS BONUSES ARE ALREADY CALCULATED IN ARENA
 // the speed type swordsman class 
 // features the bonuses it has in the games relevant to comparison
-class Myrmidon : public BaseClass{
+/*class Myrmidon : public BaseClass{
     private:
         // 30 for binding, 15 for blazing, 10 for fates
         static int BB_CRIT_BONUS;
@@ -44,11 +41,11 @@ class Myrmidon : public BaseClass{
         // used to return the crit bonus for a specific game
         int get_crit_bonus();
 
-};
+};*/
 
-class Mercenary : public BaseClass{
+/*class Mercenary : public BaseClass{
     private:
 
     public:
         
-};
+};*/

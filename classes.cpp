@@ -4,53 +4,69 @@
 #include "classes.h"
 
 // declarations used in BaseClass
+
 // function to set the growth rates for each stat
+// growths represent the 7 stats found in Fire Emblem
+// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// it takes in an array and an unsigned int
 void BaseClass::set_growths(int *arr, unsigned int x){
-   // loop to set the growth rates starts from the first element of arr
-   // x represents the arr length
+   // iterates through arr to apply the growths
    for(int i = 0; i < x; i++){
       growths[i] = arr[i];
    } 
 }
 
 // function to get the growth rates of a class
+// returns an array
 int* BaseClass::get_growths(){
-   // simply just return the array
    return growths;
 }
 
-// function to set the unit type of a class
+// function to set the movement type of a class
+// [Horse, Flier, Infantry, Armor]
+// it takes in a string value
 void BaseClass::set_type(std::string y){
-   // simply sets the value to a string name
    type = y;
 }
 
-// function to return the type of a class
+// function to return the movement type of a class
+// [Horse, Flier, Infantry, Armor]
+// returns a string
 std::string BaseClass::get_type(){
    return type;
 }
 
 // function to set the race of a class
+// [Human, Dragon]
+// it takes in a string value
 void BaseClass::set_race(std::string y){
    race = y;
 }
 
 // function used to return the race of a class
+// [Human, Dragon]
+// returns a string
 std::string BaseClass::get_race(){
    return race;
 }
 
 // function to set the name of a class
+// [Myrmidon, Mercenary, Manakete, etc.]
+// it takes in a string value
 void BaseClass::set_name(std::string y){
    name = y;
 }
 
 // function used to return the name of a class
+// [Pegasus Knight, Cavalier, Thief, etc.]
+// returns a string
 std::string BaseClass::get_name(){
    return name;
 }
 
 // testing function to display all information about a class
+// displays all information from growths to race
+// no parameters or return values
 void BaseClass::display(){
    // this is a test function to see if the information is correct
    std::cout << name << " Statistics: \n";
@@ -61,6 +77,9 @@ void BaseClass::display(){
    std::cout << "Type: " << type << "\t Race: " << race << "\n\n";
 }
 
+/*
+// UNUSED FEATURES
+// CLASS BONUSES ARE ALREADY CALCULATED IN ARENA
 // declarations used in Myrmidon
 // class bonuses for each game
 int Myrmidon::BB_CRIT_BONUS = 30;
@@ -89,5 +108,5 @@ void Myrmidon::set_crit_bonus(unsigned int x){
 int Myrmidon::get_crit_bonus(){
    return crit_bonus;
 }
+*/
 
-// declarations used in Mercenary

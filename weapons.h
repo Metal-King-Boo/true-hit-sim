@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 
+// defines the shared properties of all weapons found in the game
+// might, weight, range, kills, crit rate, accuracy, triangle position, effectiveness, bonus stats, and brave effect
+// features the option to set or receive these values for combat
 class Weapon {
     std::string weapon_name;
     int weapon_might;
@@ -9,23 +12,10 @@ class Weapon {
     int weapon_kills;
     int weapon_crit;
     int weapon_accuracy;
-    // options are 'R', 'B', and 'G'
-    // R loses to B, B loses to G, and G loses to R
-    // R = Swords and Tomes, B = Lances and Hidden Weapons, G = Axes and Bows (Fates) 
-    // options are 'W', 'T', 'F', 'L', 'D', 'A'
-    // W beats T, T beats F, F beats W, and L/D beat W/T/F (Jugdral)
-    // W = Wind Tomes, T = Thunder Tomes, F = Fire Tomes (Jugdral and Tellius)
-    // A = Anima Tomes, L = Light Tomes, and D = Dark Tomes (GBA and Radiant Dawn)
-    // A beats L, L beats D, and D beats A (GBA)
     char weapon_triangle;
     std::string weapon_effective;
-
-    // sometimes weapons apply bonus stats when wielded
-    // this is seen a lot in FE14 but other weapons like the holy weapons in FE4 have them
-    // Array Elements:  0 = HP, 1 = STR/MAG, 2 = SKL, 3 = SPD, 4 = LCK, 5 = RES 
     int bonus_stats[6];
     bool brave;
-
     public:
         void set_name(std::string y);
         void set_weapon_might(unsigned int x);
