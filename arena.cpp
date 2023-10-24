@@ -3,12 +3,12 @@
 #include <time.h>
 #include <string>
 
-// weapon level is important (especially S)
+// weapon level is important (especially S) [FE5]
 // might need a selector function to run a specific one of these functions based on game
-// reaver weapons and light brand may make this weird
+// reaver weapons and light brand may make this weird [next update ver]
 
 /*
-   term index
+   TERM INDEX
 
    skl = skill stat
    con = constitution stat
@@ -48,10 +48,6 @@
    (lck/2) + (dual_pair_bonus) + (wpn_bonus) + (class_bonus)
 */
 
-//Myrmidon Hana;
-//using Nyx mother for growths
-//Mercenary Soleil;
-
 // -------------------- SHARED FUNCTIONS --------------------
 
 // function used to produce a random number between 0 and 99
@@ -61,8 +57,10 @@ int randNum() {
     return number;
 }
 
-// functions used to check if the attack will connect
-// this one is used for games with the true hit system
+// hit confirm function used for games with the true hit system
+// [(rand1 + rand2) / 2]
+// it takes in the battle hit rate as an int
+// returns true or false
 bool trueHitCheck(int battle_hit_rate) {
     int seed;
 
@@ -78,7 +76,10 @@ bool trueHitCheck(int battle_hit_rate) {
     
 }
 
-// this one is used for games with the old accuracy system
+// hit confirm function used for games with the old accuracy system
+// [rand]
+// it takes in the battle hit rate as an int
+// returns true or false
 bool hitCheck(int battle_hit_rate) {
     int seed;
 
@@ -95,6 +96,8 @@ bool hitCheck(int battle_hit_rate) {
 }
 
 // function used to check if the attack will be a critical hit
+// it takes in the battle crit rate(crit_rate - dodge_rate) as an int
+// returns true or false
 bool criticalCheck(int crit_rate) {
     int seed;
     seed = randNum();
@@ -109,6 +112,9 @@ bool criticalCheck(int crit_rate) {
 }
 
 // function used to check the weapon triangle
+// it takes in the char triangle of both weapons
+// [1 = advantage, 2 = neutral, 3 = disadvantage]
+// returns 1, 2, or 3 as an int
 int weaponTriangle(char weapon_one, char weapon_two) {
     // use case if the weapon is R(Red) in the triangle
     if(weapon_one == 'R'){
@@ -186,13 +192,16 @@ int weaponTriangle(char weapon_one, char weapon_two) {
 }
 
 // function used to check the weapon effectiveness
+// [Horse, Flier, Infantry, Dragon, Armor, etc.]
+// it takes in unit type, unit race
+// returns true or false
 bool weaponEffectiveness(std::string wpn_type, std::string unit_type, std::string unit_race){
     // checks for things like fliers, horses, armor, etc. 
     if(wpn_type == unit_type) {
         return true;
     }
 
-    // checks for things like laguz and dragons
+    // checks for things like laguz, dragons, or monsters/terrors
     if(wpn_type == unit_race) {
         return true;
     }
@@ -203,7 +212,9 @@ bool weaponEffectiveness(std::string wpn_type, std::string unit_type, std::strin
 
 // -------------------- BINDING BLADE FUNCTIONS --------------------
 
-// this function is used for binding blade attacks
+// function used for binding blade attack calculation
+// different branches of damage based on triangle advantage, support bonus, and weapon effectiveness
+// returns an int
 int attack(int atk_stat, int wpn_might, int wpn_tri_bonus, bool eff_bonus, int supp_bonus) {
     int total_attack;
     
@@ -237,14 +248,18 @@ int attack(int atk_stat, int wpn_might, int wpn_tri_bonus, bool eff_bonus, int s
     return total_attack;
 }
 
-// this function is used for binding blade defense
+// function used for binding blade defense calculation
+// damage reduction based on the defensive stat, support bonus, and terrain bonus
+// returns an int
 int defense(int def_res_stat, int supp_bonus, int terrain_bonus) {
     int total_defense;
     total_defense = def_res_stat + supp_bonus + terrain_bonus;
     return total_defense;
 }
 
-// this function is used for binding blade damage
+// function used for binding blade damage calculation
+// takes the values from attack() and defense() and critical boolean
+// returns an int
 int damage(bool critical, int total_attack, int total_defense){
     int total_damage;
     
@@ -263,7 +278,9 @@ int damage(bool critical, int total_attack, int total_defense){
     return total_damage;
 }
 
-// this function is used for binding blade crit chance
+// function used for binding blade crit chance
+// takes the skill stat, weapon crit, support bonus, and class name to get a unit's crit chance
+// returns an int
 int critChance(int skl_stat, int wpn_bonus, int supp_bonus, std::string class_name) {
     int total_crit;
 
@@ -278,14 +295,35 @@ int critChance(int skl_stat, int wpn_bonus, int supp_bonus, std::string class_na
     return total_crit;
 }
 
-// this function is used for binding blade dodge chance
+// function used for binding blade dodge chance
+// takes luck stat and support bonus to calculate unit's total dodge chance
+// used for reducing/dodging crit hits (not to be confused with avoid)
+// returns an int
 int dodgeChance(int lck_stat, int supp_bonus) {
     // this calculation rounds down
     int total_dodge = (lck_stat / 2) + supp_bonus;
     return total_dodge;
 }
 
-// this function is used for binding blade accuracy
+// function used for binding blade battle crit chance
+// the actual crit chance used in combat when confirming critical hits
+// takes attacker's total crit and defender's total dodge (not to be confused with avoid)
+// returns an int
+int battleCritChance(int total_crit, int total_dodge) {
+    int battle_crit_rate;
+    
+    battle_crit_rate = total_crit - total_dodge;
+
+    // prevention of getting negative numbers
+    if(battle_crit_rate <= 0){
+        battle_crit_rate = 0;
+    }
+    return battle_crit_rate;
+}
+
+// function used for binding blade accuracy
+// takes weapon accuracy, skill stat, luck stat, weapon triangle and support bonus
+// returns an int
 int accuracy(int wpn_hit, int skl_stat, int lck_stat, int wpn_tri_bonus, int supp_bonus) {
     int total_accuracy;
 
@@ -304,7 +342,10 @@ int accuracy(int wpn_hit, int skl_stat, int lck_stat, int wpn_tri_bonus, int sup
     return total_accuracy;
 }
 
-// this function is used for binding blade avoid
+// function used for binding blade avoid
+// takes attack speed, luck stat, support bonus, and terrain bonus
+// used for avoiding damage
+// returns an int
 int avoid(int total_attack_speed, int lck_stat, int supp_bonus, int terrain_bonus) {
     int total_avoid;
 
@@ -312,7 +353,11 @@ int avoid(int total_attack_speed, int lck_stat, int supp_bonus, int terrain_bonu
 
     return total_avoid;
 }
-// this function is used for binding blade battle accuracy
+
+// function used for binding blade battle accuracy
+// the actual accuracy used when confirming hits
+// takes attacker's accuracy and defender's avoid
+// returns an int
 int battleAccuracy(int total_accuracy, int total_avoid) {
     int battle_accuracy;
     
@@ -324,7 +369,10 @@ int battleAccuracy(int total_accuracy, int total_avoid) {
     }
     return battle_accuracy;
 }
-// this function is used for binding blade action speed (used for determining double attacks and avoid)
+// function used for binding blade action speed
+// used for determining double attacks and avoid
+// takes speed stat, weapon weight, and constitution stat
+// returns an int
 int attackSpeed(int spd_stat, int wpn_weight, int con_stat) {
     int attack_speed;
     int muscle;
