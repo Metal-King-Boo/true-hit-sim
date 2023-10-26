@@ -51,7 +51,7 @@ int Weapon::get_weapon_weight(){
 }
 
 // function that sets weapon range
-// the first value should be smaller than the second value
+// the first value should be smaller or the same as the second value
 // it takes in two unsigned ints
 void Weapon::set_range(unsigned int x, unsigned int y){
     weapon_range[0] = x;
@@ -131,7 +131,7 @@ std::string Weapon::get_weapon_effective(){
 }
 
 // function that sets any bonus stats a weapon has
-// [HP, ATK/MAG, SKL, SPD, LCK, RES]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES]
 // it takes in an array and an unsigned int
 void Weapon::set_bonus_stats(int *arr, unsigned int x){
     // iterates through arr to match up with the standard stat order
@@ -141,7 +141,7 @@ void Weapon::set_bonus_stats(int *arr, unsigned int x){
 }
 
 // function that returns any bonus stats a weapon has
-// [HP, ATK/MAG, SKL, SPD, LCK, RES]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES]
 // returns an array
 int* Weapon::get_bonus_stats(){
     return bonus_stats;
@@ -169,5 +169,5 @@ void Weapon::display(){
     std::cout << "Crit: " << weapon_crit << "   Range: " << weapon_range[0] << "-" << weapon_range[1] << "\n";
     std::cout << "Triangle: " << weapon_triangle << "   Kills: " << weapon_kills << "\n";
     std::cout << "Eff: " << weapon_effective << "   Brave: " << brave << "\n";
-    std::cout << "Bonuses: \nSTR/MAG - " << bonus_stats[1] << "   SKL/DEX - " << bonus_stats[2] << "\nSPD - " << bonus_stats[3] << "       LCK: " << bonus_stats[4] << "\nRES - " << bonus_stats[5] << "\n\n";
+    std::cout << "Bonuses: \nSTR/MAG - " << bonus_stats[1] << "   SKL/DEX - " << bonus_stats[2] << "\nSPD - " << bonus_stats[3] << "       LCK - " << bonus_stats[4] << "\nDEF - " << bonus_stats[5]  << "       RES - " << bonus_stats[6] << "\n\n";
 }

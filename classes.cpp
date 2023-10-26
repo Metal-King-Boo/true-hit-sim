@@ -6,8 +6,8 @@
 // declarations used in BaseClass
 
 // function to set the growth rates for each stat
-// growths represent the 7 stats found in Fire Emblem
-// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// growths represent the 8 stats found in Fire Emblem
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES, CON]
 // it takes in an array and an unsigned int
 void BaseClass::set_growths(int *arr, unsigned int x){
    // iterates through arr to apply the growths
@@ -72,8 +72,8 @@ void BaseClass::display(){
    std::cout << name << " Statistics: \n";
    std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
    std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
-   std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n\n";
-   std::cout << "CON - " << growths[6] << "%\n\n";
+   std::cout << "SKL/DEX - " << growths[2] << "%    DEF - " << growths[5] << "%\n\n";
+   std::cout << "RES - " << growths[6] << "%        CON - " << growths[7] << "%\n\n";
    std::cout << "Type: " << type << "\t Race: " << race << "\n\n";
 }
 

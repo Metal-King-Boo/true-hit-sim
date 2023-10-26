@@ -43,6 +43,60 @@ struct Merc {
 };*/
 
 // need a function to set the values of the character, class, weapon, and game for every struct created
+// need weapon level for blazing sword in character
+
+// function used to populate a unit
+// builds character, class, weapon, game, name, and current hp
+// has no return value; takes in a unit struct
+void createUnit(Unit *unit) {
+    unit->game = 6;
+    unit->name = "Dieck";
+
+    createCharacter(unit);
+    createClass(unit);
+    createWeapon(unit);
+
+    int *arr[8];
+    *arr = unit->character.get_stats();
+    unit->current_hp = *arr[0];
+}
+
+// function used to populate data on characters
+// fills in the current level, stats, and growths
+// has no return value; takes in a unit struct
+void createCharacter(Unit *unit) {
+    int arr[] = {26, 9, 12, 10, 5, 6, 1, 13};
+    int arr2[] = {90, 40, 40, 30, 35, 20, 15, 0};
+    unit->character.set_stats(arr, 8);
+    unit->character.set_growths(arr2, 8);
+    unit->character.set_level(5);
+}
+
+// function used to populate data on classes
+// fills in the growths, 
+// has no return value; takes in a unit struct
+void createClass(Unit *unit) {
+    int arr[] = {0, 0, 0, 0, 0, 0, 0, 0};
+    unit->base.set_name("Mercenary");
+    unit->base.set_race("Human");
+    unit->base.set_type("Infantry");
+    unit->base.set_growths(arr, 8);
+}
+
+// function used to populate data on weapons
+// fills in the might, weight, accuracy, triangle, effectiveness, range, etc.
+// has no return value; takes in a unit struct
+void createWeapon(Unit *unit) {
+    int arr[] = {0, 0, 0, 0, 0, 0, 0, 0};
+    unit->weapon.set_name("Steel Sword");
+    unit->weapon.set_weapon_might(8);
+    unit->weapon.set_weapon_weight(10);
+    unit->weapon.set_weapon_accuracy(70);
+    unit->weapon.set_weapon_crit(0);
+    unit->weapon.set_range(1, 1);
+    unit->weapon.set_brave(false);
+    unit->weapon.set_bonus_stats(arr, 8);
+}
 
 // functions used to select which game's crit formula to use
 int critSelect(Unit *unit) {

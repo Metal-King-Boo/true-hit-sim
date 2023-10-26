@@ -6,8 +6,8 @@
 // stats, growth rates, and level
 // features the option to set or receive these values for combat and level ups
 class Character {
-    int stats[7];
-    int growths[7];
+    int stats[8];
+    int growths[8];
     int level;
     public:
         void set_stats(int* arr, unsigned int x);

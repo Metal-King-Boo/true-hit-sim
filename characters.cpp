@@ -5,7 +5,7 @@
 // declarations used in Character
 
 // function used to set the stats of a character
-// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES, CON]
 // it takes in an array and an unsigned int
 void Character::set_stats(int* arr, unsigned int x){
     // iterates through arr to apply the stats
@@ -15,14 +15,14 @@ void Character::set_stats(int* arr, unsigned int x){
 }
 
 // function used to get the stats of a character
-// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES, CON]
 // returns an array
 int* Character::get_stats(){
     return stats;
 }
 
 // function used to set the growth rates of a character
-// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES, CON]
 // it takes in an array and an unsigned int
 void Character::set_growths(int* arr, unsigned int x){
     // iterates through arr to apply the growths
@@ -32,7 +32,7 @@ void Character::set_growths(int* arr, unsigned int x){
 }
 
 // function used to get the growth rates of a character
-// [HP, ATK/MAG, SKL, SPD, LCK, RES, CON]
+// [HP, ATK/MAG, SKL, SPD, LCK, DEF, RES, CON]
 // returns an array
 int* Character::get_growths(){
     return growths;
@@ -59,12 +59,12 @@ void Character::display(){
     std::cout << "Stats: \n";
     std::cout << "HP - " << stats[0] << "         SPD - " << stats[3] << "\n";
     std::cout << "ATK/MAG - " << stats[1] << "    LCK - " << stats[4] << "\n";
-    std::cout << "SKL/DEX - " << stats[2] << "    RES - " << stats[5] << "\n";
-    std::cout << "CON - " << stats[6] << "\n";
+    std::cout << "SKL/DEX - " << stats[2] << "    DEF - " << stats[5] << "\n";
+    std::cout << "RES - " << stats[6] << "        CON - " << stats[7] << "\n";
 
     std::cout << "Character Growths:\n";
     std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
     std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
     std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n\n";
-    std::cout << "CON - " << growths[6] << "%\n\n";
+    std::cout << "RES - " << growths[6] << "%        CON - " << growths[6] << "%\n\n";
 }

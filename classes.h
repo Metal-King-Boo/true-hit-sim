@@ -6,7 +6,7 @@
 // growth rates, movement type, class race, and class name
 // features the option to set or receive these values for combat and level ups
 class BaseClass {
-    int growths[7];
+    int growths[8];
     std::string type;
     std::string race;
     std::string name;

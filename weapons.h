@@ -14,7 +14,7 @@ class Weapon {
     int weapon_accuracy;
     char weapon_triangle;
     std::string weapon_effective;
-    int bonus_stats[6];
+    int bonus_stats[7];
     bool brave;
     public:
         void set_name(std::string y);
