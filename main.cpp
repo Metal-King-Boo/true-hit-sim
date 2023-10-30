@@ -8,6 +8,10 @@
 #include "weapons.h"
 #include "arena.cpp"
 
+
+// https://forums.serenesforest.net/index.php?/topic/91108-a-deep-dive-into-level-up-mechanics/
+
+
 /*
     Values used for the game int, to represent which game structure is being used
     0 = FE1    4 = FE5    8 = FE9    12 = FE13   16 = FE17
@@ -42,14 +46,20 @@ struct Merc {
     int game;
 };*/
 
-// need a function to set the values of the character, class, weapon, and game for every struct created
 // need weapon level for blazing sword in character
+
+// declaration of functions used in main
+void createUnit(Unit *unit);
+void createCharacter(Unit *unit);
+void createClass(Unit *unit);
+void createWeapon(Unit *unit);
+void levelUp(Unit *unit);
 
 // function used to populate a unit
 // builds character, class, weapon, game, name, and current hp
 // has no return value; takes in a unit struct
 void createUnit(Unit *unit) {
-    unit->game = 6;
+    unit->game = 5;
     unit->name = "Dieck";
 
     createCharacter(unit);
@@ -94,8 +104,35 @@ void createWeapon(Unit *unit) {
     unit->weapon.set_weapon_accuracy(70);
     unit->weapon.set_weapon_crit(0);
     unit->weapon.set_range(1, 1);
+    unit->weapon.set_weapon_effective("None");
+    unit->weapon.set_weapon_kills(0);
+    unit->weapon.set_weapon_triangle('R');
     unit->weapon.set_brave(false);
     unit->weapon.set_bonus_stats(arr, 8);
+}
+
+// function used to level up a unit
+// [FE6-8] forces up to 2 rerolls if no stat increased
+// this is not effected by reaching stat caps
+// has no return value; takes in a unit struct
+void levelUp(Unit *unit){
+    int total_growth_rates[8];
+    int total_growths[8];
+
+    int *arr[8];
+    int *arr2[8];
+    *arr = unit->character.get_growths();
+    *arr2 = unit->base.get_growths();
+
+    // iterates to collect the total growth rate of all stats
+    for(int i = 0; i < 8; i++) {
+        total_growth_rates[i] = *arr[i] + *arr2[i];
+    }
+
+    // iterates to get which stats get grow
+    for(int j = 0; j < 8; j++) {
+
+    }
 }
 
 // functions used to select which game's crit formula to use
@@ -142,63 +179,31 @@ int dodgeSelect(Unit *unit) {
     return dodge_chance;
 };
 
+// make a combat forecast?
+// preferably so
+
+// have to make a uml diagram for how main will run combat
+// need to decide on 1 vs multiple combatants
+
+// level up feature needs to be added 
+
 int main() {
     // the random number seed is generated based on the current time
     srand(time(0));
     int rng = randNum();
     Unit echidna;
+    Unit gorgon;
     
-    int arr[6] = {randNum(), randNum(), randNum(), randNum(), randNum(), randNum()};
-    int arr2[7] = {randNum(), randNum(), randNum(), randNum(), randNum(), randNum(), randNum()};
+    createUnit(&echidna);
+    createUnit(&gorgon);
 
-    // 113 and 51 respectively
-    int val1 = attack(20, 30, 1, true, 0);
-    int val2 = attack(20, 30, 1, false, 0);
+    std::cout << "Current HP: " << echidna.current_hp << "\n";
+    std::cout << "Game: FE" << echidna.game + 1 << "\n";
+    std::cout << "Name: " << echidna.name << "\n\n";
 
-    // 28 and 17 respectively
-    int val3 = defense(25, 0, 3);
-    int val4 = defense(7, 0, 10);
-
-    // 69, 23, 0, and 0 respectively
-    int val5 = damage(true, val2, val3);
-    int val6 = damage(false, val2, val3);
-    int val7 = damage(true, 15, 20);
-    int val8 = damage(false, 15, 20);
-
-    // 68 and 38 respectively
-    int val9 = critChance(17, 30, 30, 0);
-    int val10 = critChance(17, 0, 30, 0);
-
-    // 10 and 2 respectively
-    int val11 = dodgeChance(20, 0);
-    int val12 = dodgeChance(5, 0);
-
-    // 99, 89, and 79 respectively
-    int val13 = accuracy(80, 15, 5, 1, 0);
-    int val14 = accuracy(80, 15, 5, 2, 0);
-    int val15 = accuracy(80, 15, 5, 3, 0);
-
-    // 21, 10, and 0 respectively
-    int val16 = attackSpeed(25, 10, 6);
-    int val17 = attackSpeed(10, 5, 14);
-    int val18 = attackSpeed(5, 10, 1);
-
-    // 70 and 25 respectively
-    int val19 = avoid(val17, 20, 0, 30);
-    int val20 = avoid(val18, 5, 0, 20);
-
-    // 29 and 0 respectively
-    int val21 = battleAccuracy(val13, val19);
-    int val22 = battleAccuracy(10, val20);
-
-
-    std::cout << "calling the function gets = " << val21 << " ";
-
-    std::cout << "\n\n";
-
-    std::cout << "calling the function gets = " << val22 << " ";
-
-    std::cout << "\n\n";
+    echidna.character.display();
+    echidna.base.display();
+    echidna.weapon.display();
 
     return 0;
 }

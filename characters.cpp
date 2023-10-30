@@ -65,6 +65,6 @@ void Character::display(){
     std::cout << "Character Growths:\n";
     std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
     std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
-    std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n\n";
+    std::cout << "SKL/DEX - " << growths[2] << "%    RES - " << growths[5] << "%\n";
     std::cout << "RES - " << growths[6] << "%        CON - " << growths[6] << "%\n\n";
 }

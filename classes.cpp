@@ -72,8 +72,8 @@ void BaseClass::display(){
    std::cout << name << " Statistics: \n";
    std::cout << "HP - " << growths[0] << "%         SPD - " << growths[3] << "%\n";
    std::cout << "ATK/MAG - " << growths[1] << "%    LCK - " << growths[4] << "%\n";
-   std::cout << "SKL/DEX - " << growths[2] << "%    DEF - " << growths[5] << "%\n\n";
-   std::cout << "RES - " << growths[6] << "%        CON - " << growths[7] << "%\n\n";
+   std::cout << "SKL/DEX - " << growths[2] << "%    DEF - " << growths[5] << "%\n";
+   std::cout << "RES - " << growths[6] << "%        CON - " << growths[7] << "%\n";
    std::cout << "Type: " << type << "\t Race: " << race << "\n\n";
 }
 
