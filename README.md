@@ -8,11 +8,11 @@ Plan Log
 
 Features
 - Leveling
-After inputting a unit's stats and growths you can simulate level ups.
-Great for comparing two units but you need them at equal level.
++ After inputting a unit's stats and growths you can simulate level ups.
++ Great for comparing two units but you need them at equal level.
 - Combat
-After setting up a unit and their foe(s) you can see a battle forecast.
-Continuing will simulate the combat to get data on projected vs actual hit/crit rates. 
++ After setting up a unit and their foe(s) you can see a battle forecast.
++ Continuing will simulate the combat to get data on projected vs actual hit/crit rates. 
 
 How to Use
 Standard Users
