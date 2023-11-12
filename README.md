@@ -11,5 +11,10 @@ Features
 - Combat
 - 
 
-#How to Use
-- 
+How to Use
+Standard Users
+follow the command line instructions to decide what you want to do with the program
+Developers
+In the source code you can import the arena/classes/characters/weapons header and cpp files and write your own main file.
+You would have add/rewrite the functions found in main but the brunt of the code is in the afformentioned files.
+- coming soon...
