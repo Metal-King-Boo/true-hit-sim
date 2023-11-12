@@ -1,7 +1,7 @@
 # true-hit-sim
 Have you ever wanted to prove to the world that the Swordmaster is not as great a class as everyone else claims? Show them that Heroes are better in every way except critical animations? Have you ever wanted to prove why growths and bases go hand in hand for tier making? Well now you can! 
 
-Introducing the **True Hit Sim** (*Name not Final*). This tool can solve those problems for you and with copious amount of data to boot. Now instead of lying through your teeth, quantifiable data is within your power. And relatively easy to calculate.
+Introducing the **True Hit Sim** (*Name not Final*). This tool can solve those problems for you and with copious amount of data to boot. Now instead of ***lying through your teeth***, quantifiable data is within your power. And relatively easy to gather.
 
 ## Features
 ### Leveling
