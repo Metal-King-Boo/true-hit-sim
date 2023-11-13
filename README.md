@@ -21,6 +21,7 @@ Introducing the **True Hit Sim** (*Name not Final*). This tool can solve those p
   + classes
   + etc.
 + the program will be connected to it but an easier way to directly reference the data will be added later
++ (more text here)
 
 ## How to Use
 ### Standard Users
