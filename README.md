@@ -15,7 +15,12 @@ Introducing the **True Hit Sim** (*Name not Final*). This tool can solve those p
 + (more text here)
 
 ### Using Presets
-+ (more text here)
++ they are planned to be accessible through a database with general information
+  + characters
+  + weapons
+  + classes
+  + etc.
++ the program will be connected to it but an easier way to directly reference the data will be added later
 
 ## How to Use
 ### Standard Users
