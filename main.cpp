@@ -118,21 +118,44 @@ void createWeapon(Unit *unit) {
 void levelUp(Unit *unit){
     int total_growth_rates[8];
     int total_growths[8];
+    bool leveled = false;
+    int loop = 0;
 
     int *arr[8];
     int *arr2[8];
+    int *arr3[8];
     *arr = unit->character.get_growths();
     *arr2 = unit->base.get_growths();
+    *arr3 = unit->character.get_stats();
 
     // iterates to collect the total growth rate of all stats
     for(int i = 0; i < 8; i++) {
         total_growth_rates[i] = *arr[i] + *arr2[i];
     }
 
-    // iterates to get which stats get grow
-    for(int j = 0; j < 8; j++) {
-
+    // iterates to get which stats grow
+    // loops it if no stats where gained [GBA]
+    // loops a total of three times if you fail
+    do {
+        for(int j = 0; j < 8; j++) {
+            int seed = randNum();
+            if(seed <= total_growth_rates[j]) {
+                total_growths[j] = 1;
+                leveled = true;
+            }
+        }
+        loop++;
     }
+    while(leveled == false || loop == 3);
+
+    // merge the stats to reflect the growth
+    for(int k = 0; k < 8; k++) {
+        total_growths[k] = total_growths[k] + *arr3[k];
+    }
+
+    // send the stats back to the unit and raise the level
+    unit->character.set_growths(total_growths, 8);
+    unit->character.set_level(unit->character.get_level() + 1);
 }
 
 // functions used to select which game's crit formula to use
