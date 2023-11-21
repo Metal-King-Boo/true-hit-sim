@@ -158,6 +158,24 @@ void levelUp(Unit *unit){
     unit->character.set_level(unit->character.get_level() + 1);
 }
 
+void battleForecast(Unit *unit, Unit *unit2) {
+    int *arr = unit->character.get_stats();
+    int *arr2 = unit2->character.get_stats();
+
+    // 
+    std::cout << "--------------\n";
+    std::cout << "|" << unit->name << "       |\n";
+    std::cout << "|" << unit->base.get_name() << "   |\n";
+    std::cout << "|" << unit->weapon.get_name() << " |\n";
+    std::cout << "|   ---------|\n";
+    std::cout << "|  " << unit->character.get_level() << "| LV |  " << unit2->character.get_level() << "|\n";
+    std::cout << "| " << unit->current_hp << "| HP | " << unit2->current_hp() << "|\n";
+    std::cout << "| " << damage(criticalCheck(battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0))), attack(arr[1], unit->weapon.get_weapon_might(), weaponTriangle(unit->weapon.get_weapon_triangle(), unit2->weapon.get_weapon_triangle()), weaponEffectiveness(unit->weapon.get_weapon_effective(), unit2->base.get_type(), unit2->base.get_race()), 0), defense(arr2[5], 0, 0)) << "| DMG| "
+              << damage(criticalCheck(battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0))), attack(arr2[1], unit2->weapon.get_weapon_might(), weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle()), weaponEffectiveness(unit2->weapon.get_weapon_effective(), unit->base.get_type(), unit->base.get_race()), 0), defense(arr[5], 0, 0)) << "|\n";
+    std::cout << "|  " << attackSpeed(arr[3], unit->weapon.get_weapon_weight(), arr[7]) << "| AC |  " << attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]) << "|\n";
+    std::cout << 
+}
+
 // functions used to select which game's crit formula to use
 int critSelect(Unit *unit) {
     int crit_chance;
