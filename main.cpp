@@ -20,7 +20,7 @@
     3 = FE4    7 = FE8    11 = FE12  15 = FE16
 */
 
-// to start i need i/o functionality for copious amounts of data
+// to start i need file i/o functionality for copious amounts of data
 // then i can move on to creating the GUI version utilizing this module
 
 struct Unit {
@@ -239,13 +239,9 @@ int dodgeSelect(Unit *unit) {
     return dodge_chance;
 };
 
-// make a combat forecast?
-// preferably so
-
-// have to make a uml diagram for how main will run combat
 // need to decide on 1 vs multiple combatants
-
 // level up feature needs to be added 
+// isAlive(), strike(), and battle() functions need to be made
 
 int main() {
     // the random number seed is generated based on the current time
