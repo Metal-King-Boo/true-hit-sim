@@ -158,10 +158,20 @@ void levelUp(Unit *unit){
     unit->character.set_level(unit->character.get_level() + 1);
 }
 
+// shows the relevant information for battle with two units
+// shows lvl, current hp, damage, hit rate, accuracy, speed, names, classes, and weapons
+// has no return value; takes in two unit structs
 void battleForecast(Unit *unit, Unit *unit2) {
     int *arr = unit->character.get_stats();
     int *arr2 = unit2->character.get_stats();
 
+    int p1_weapon_triangle = weaponTriangle(unit->weapon.get_weapon_triangle(), unit2->weapon.get_weapon_triangle());
+    int p2_weapon_triangle = weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle());
+    int p1_attack_speed = attackSpeed(arr[3], unit->weapon.get_weapon_weight(), arr[7]);
+    int p2_attack_speed = attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]);
+    int p1_battle_crit_chance = battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0));
+    int p2_battle_crit_chance = battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0));
+    
     // 
     std::cout << "--------------\n";
     std::cout << "|" << unit->name << "       |\n";
@@ -169,11 +179,20 @@ void battleForecast(Unit *unit, Unit *unit2) {
     std::cout << "|" << unit->weapon.get_name() << " |\n";
     std::cout << "|   ---------|\n";
     std::cout << "|  " << unit->character.get_level() << "| LV |  " << unit2->character.get_level() << "|\n";
-    std::cout << "| " << unit->current_hp << "| HP | " << unit2->current_hp() << "|\n";
-    std::cout << "| " << damage(criticalCheck(battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0))), attack(arr[1], unit->weapon.get_weapon_might(), weaponTriangle(unit->weapon.get_weapon_triangle(), unit2->weapon.get_weapon_triangle()), weaponEffectiveness(unit->weapon.get_weapon_effective(), unit2->base.get_type(), unit2->base.get_race()), 0), defense(arr2[5], 0, 0)) << "| DMG| "
-              << damage(criticalCheck(battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0))), attack(arr2[1], unit2->weapon.get_weapon_might(), weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle()), weaponEffectiveness(unit2->weapon.get_weapon_effective(), unit->base.get_type(), unit->base.get_race()), 0), defense(arr[5], 0, 0)) << "|\n";
-    std::cout << "|  " << attackSpeed(arr[3], unit->weapon.get_weapon_weight(), arr[7]) << "| AC |  " << attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]) << "|\n";
-    std::cout << 
+    std::cout << "| " << unit->current_hp << "| HP | " << unit2->current_hp << "|\n";
+    // incorrect it shows the damage with the crit attached
+    // should just be attack() - defense() no crit involved
+    std::cout << "| " << damage(false, attack(arr[1], unit->weapon.get_weapon_might(), p1_weapon_triangle, weaponEffectiveness(unit->weapon.get_weapon_effective(), unit2->base.get_type(), unit2->base.get_race()), 0), defense(arr2[5], 0, 0)) << "| DMG| "
+              << damage(false, attack(arr2[1], unit2->weapon.get_weapon_might(), p2_weapon_triangle, weaponEffectiveness(unit2->weapon.get_weapon_effective(), unit->base.get_type(), unit->base.get_race()), 0), defense(arr[5], 0, 0)) << "|\n";
+    std::cout << "|  " << p1_attack_speed << "| AC |  " << p2_attack_speed << "|\n";
+    std::cout << "| " << battleAccuracy(accuracy(unit->weapon.get_weapon_accuracy(), arr[2], arr[4], p1_weapon_triangle, 0), avoid(p2_attack_speed, arr2[4], 0, 0)) << "| HIT| "
+              << battleAccuracy(accuracy(unit2->weapon.get_weapon_accuracy(), arr2[2], arr2[4], p2_weapon_triangle, 0), avoid(p1_attack_speed, arr[4], 0, 0)) << "|\n";
+    std::cout << "| " << p1_battle_crit_chance << "|CRIT| " << p2_battle_crit_chance << "|";
+    std::cout << "|---------   |\n";
+    std::cout << "| " << unit2->weapon.get_name() << "|\n";
+    std::cout << "|   " << unit2->base.get_name() << "|\n";
+    std::cout << "|       " << unit->name << "|\n";   
+    std::cout << "--------------\n";       
 }
 
 // functions used to select which game's crit formula to use
