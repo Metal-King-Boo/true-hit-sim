@@ -10,7 +10,8 @@ Introducing the **True Hit Sim** (*Name not Final*). This tool can solve those p
 + (more text here)
 
 ### Combat
-+ After setting up a unit and their foe(s) you can see a battle forecast.
++ After setting up a unit and their foe(s) you can see the **Combat Forecast**.
+  + (more text here)
 + Continuing will simulate the combat to get data on projected vs actual hit/crit rates.
 + (more text here)
 

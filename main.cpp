@@ -172,7 +172,7 @@ void battleForecast(Unit *unit, Unit *unit2) {
     int p1_battle_crit_chance = battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0));
     int p2_battle_crit_chance = battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0));
     
-    // 
+    // blurb of code that outputs a battle forecast similar to the one seen in FE5
     std::cout << "--------------\n";
     std::cout << "|" << unit->name << "       |\n";
     std::cout << "|" << unit->base.get_name() << "   |\n";
@@ -180,19 +180,36 @@ void battleForecast(Unit *unit, Unit *unit2) {
     std::cout << "|   ---------|\n";
     std::cout << "|  " << unit->character.get_level() << "| LV |  " << unit2->character.get_level() << "|\n";
     std::cout << "| " << unit->current_hp << "| HP | " << unit2->current_hp << "|\n";
-    // incorrect it shows the damage with the crit attached
-    // should just be attack() - defense() no crit involved
     std::cout << "| " << damage(false, attack(arr[1], unit->weapon.get_weapon_might(), p1_weapon_triangle, weaponEffectiveness(unit->weapon.get_weapon_effective(), unit2->base.get_type(), unit2->base.get_race()), 0), defense(arr2[5], 0, 0)) << "| DMG| "
               << damage(false, attack(arr2[1], unit2->weapon.get_weapon_might(), p2_weapon_triangle, weaponEffectiveness(unit2->weapon.get_weapon_effective(), unit->base.get_type(), unit->base.get_race()), 0), defense(arr[5], 0, 0)) << "|\n";
-    std::cout << "|  " << p1_attack_speed << "| AC |  " << p2_attack_speed << "|\n";
+    std::cout << "| " << p1_attack_speed << "| AC | " << p2_attack_speed << "|\n";
     std::cout << "| " << battleAccuracy(accuracy(unit->weapon.get_weapon_accuracy(), arr[2], arr[4], p1_weapon_triangle, 0), avoid(p2_attack_speed, arr2[4], 0, 0)) << "| HIT| "
               << battleAccuracy(accuracy(unit2->weapon.get_weapon_accuracy(), arr2[2], arr2[4], p2_weapon_triangle, 0), avoid(p1_attack_speed, arr[4], 0, 0)) << "|\n";
-    std::cout << "| " << p1_battle_crit_chance << "|CRIT| " << p2_battle_crit_chance << "|";
+    std::cout << "|  " << p1_battle_crit_chance << "|CRIT|  " << p2_battle_crit_chance << "|\n";
     std::cout << "|---------   |\n";
     std::cout << "| " << unit2->weapon.get_name() << "|\n";
     std::cout << "|   " << unit2->base.get_name() << "|\n";
     std::cout << "|       " << unit->name << "|\n";   
     std::cout << "--------------\n";       
+}
+
+//
+bool isDead(Unit *unit) {
+
+    if(unit->current_hp == 0 ) {
+        return true;
+    }
+    return false;
+}
+
+//
+std::string combat(int attacks1, int attacks2) {
+
+}
+
+//
+void strike(Unit *unit1, Unit *unit2, bool brave) {
+
 }
 
 // functions used to select which game's crit formula to use
@@ -260,6 +277,8 @@ int main() {
     echidna.character.display();
     echidna.base.display();
     echidna.weapon.display();
+
+    battleForecast(&echidna, &gorgon);
 
     return 0;
 }
