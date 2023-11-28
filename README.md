@@ -43,6 +43,6 @@ You would have add/rewrite the functions found in main but the brunt of the code
 + after that is EoU and other games working backwards from Thracia 776
 
 ## Links
-+ [Promotion Gains Explanation](https://www.reddit.com/r/fireemblem/comments/12owf4o/the_history_of_promotion_bonuses_across_the_series/)
-+ [Level Up Mechanics Deep Dive](https://forums.serenesforest.net/index.php?/topic/91108-a-deep-dive-into-level-up-mechanics/)
-+ 
++ Promotion Gains [Explanation](https://www.reddit.com/r/fireemblem/comments/12owf4o/the_history_of_promotion_bonuses_across_the_series/)
++ Level Up Mechanics [Deep Dive](https://forums.serenesforest.net/index.php?/topic/91108-a-deep-dive-into-level-up-mechanics/)
++ General Information [Site](https://serenesforest.net/)
