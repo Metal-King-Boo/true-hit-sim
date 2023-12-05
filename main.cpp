@@ -197,7 +197,7 @@ void battleForecast(Unit *unit, Unit *unit2) {
 // returns a boolean; takes in a unit struct
 bool isDead(Unit *unit) {
 
-    if(unit->current_hp == 0 ) {
+    if(unit->current_hp == 0) {
         return true;
     }
     return false;
