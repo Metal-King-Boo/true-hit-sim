@@ -193,7 +193,8 @@ void battleForecast(Unit *unit, Unit *unit2) {
     std::cout << "--------------\n";       
 }
 
-//
+// used to determine if a character died to an attack in combat
+// returns a boolean; takes in a unit struct
 bool isDead(Unit *unit) {
 
     if(unit->current_hp == 0 ) {
@@ -202,12 +203,12 @@ bool isDead(Unit *unit) {
     return false;
 }
 
-//
+// used for the individual attacks
 std::string combat(int attacks1, int attacks2) {
 
 }
 
-//
+// used for the total combat scene 
 void strike(Unit *unit, Unit *unit2, bool brave) {
     int *arr = unit->character.get_stats();
     int *arr2 = unit2->character.get_stats();
@@ -250,6 +251,7 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
         p2_attacks = 1;
     }
 
+    // -------------------------------  FINISH FOR ATTACKS --------------------------
     //do
     //{
         /* code */
