@@ -208,8 +208,53 @@ std::string combat(int attacks1, int attacks2) {
 }
 
 //
-void strike(Unit *unit1, Unit *unit2, bool brave) {
+void strike(Unit *unit, Unit *unit2, bool brave) {
+    int *arr = unit->character.get_stats();
+    int *arr2 = unit2->character.get_stats();
+    int p1_attacks;
+    int p2_attacks;
 
+    int p1_weapon_triangle = weaponTriangle(unit->weapon.get_weapon_triangle(), unit2->weapon.get_weapon_triangle());
+    int p2_weapon_triangle = weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle());
+    int p1_attack_speed = attackSpeed(arr[3], unit->weapon.get_weapon_weight(), arr[7]);
+    int p2_attack_speed = attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]);
+    int p1_battle_crit_chance = battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0));
+    int p2_battle_crit_chance = battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0));
+
+    // gives the attack counts for each person in combat
+    // the first if statement matches for when unit 1 is faster than unit 2
+    if(p1_attack_speed > p2_attack_speed) {
+        // this runs to check if unit 1 will double unit 2
+        if((p1_attack_speed - p2_attack_speed) >= 4) {
+            p1_attacks = 2;
+            p2_attacks = 1;
+        } else { 
+            p1_attacks = 1;
+            p2_attacks = 1;
+        }
+    } 
+    // the else if statement matches for when unit 2 is faster than unit 1
+    else if(p2_attack_speed > p1_attack_speed) {
+        // this runs to check if unit 2 will double unit 1
+        if((p2_attack_speed - p1_attack_speed) >= 4) {
+            p2_attacks = 2;
+            p1_attacks = 1;
+        } else {
+            p2_attacks = 1;
+            p1_attacks = 1;
+        }
+    } 
+    // the else statement matches for when unit 1 or unit 2 are the same speed
+    else {
+        p1_attacks = 1;
+        p2_attacks = 1;
+    }
+
+    //do
+    //{
+        /* code */
+    //} while (/* condition */);
+    
 }
 
 // functions used to select which game's crit formula to use
