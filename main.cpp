@@ -259,6 +259,7 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
     
 }
 
+/*
 // functions used to select which game's crit formula to use
 int critSelect(Unit *unit) {
     int crit_chance;
@@ -301,11 +302,13 @@ int dodgeSelect(Unit *unit) {
     }
 
     return dodge_chance;
-};
+};*/
 
 // need to decide on 1 vs multiple combatants
-// level up feature needs to be added 
-// isAlive(), strike(), and battle() functions need to be made
+// level up feature needs to be added [complete?]
+// promotion needs to be added
+// isAlive(), strike(), and battle() functions need to be made [isAlive() is done, strike() in progress]
+// need to add advanced classes slot
 
 int main() {
     // the random number seed is generated based on the current time
