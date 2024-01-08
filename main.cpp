@@ -46,8 +46,6 @@ struct Merc {
     int game;
 };*/
 
-// need weapon level for blazing sword in character
-
 // declaration of functions used in main
 void createUnit(Unit *unit);
 void createCharacter(Unit *unit);
@@ -205,8 +203,11 @@ bool isDead(Unit *unit) {
 
 // used for the individual attacks
 // this function is looped for each combat "round" possible in a fight
-std::string combat(int attacks1, int attacks2, bool combat_counter) {
-
+// a round consists of both parties attacking, or 1 party attacking and the other dying, or 1 party attacking and the other cannot retaliate.
+// does not return anything
+void combat(int *attacks1, int *attacks2, bool combat_counter) {
+    // should decrement attacks but never hit -1
+    // should also account for brave weapons eventually
 }
 
 // used for the total combat scene 
@@ -258,7 +259,7 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
 
     do
     {
-        combat(p1_attacks, p2_attacks, combat_counter)
+        combat(&p1_attacks, &p2_attacks, combat_counter);
     } while (combat_counter);
     
 }
@@ -311,8 +312,9 @@ int dodgeSelect(Unit *unit) {
 // need to decide on 1 vs multiple combatants
 // level up feature needs to be added [complete?]
 // promotion needs to be added
-// isAlive(), strike(), and battle() functions need to be made [isAlive() is done, strike() in progress]
+// isAlive(), strike(), and combat() functions need to be made [isAlive() is done, strike() in progress, combat() in progress]
 // need to add advanced classes slot
+// eventually switch to no longer using the console to display
 
 int main() {
     // the random number seed is generated based on the current time
