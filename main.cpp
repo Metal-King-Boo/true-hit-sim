@@ -204,7 +204,8 @@ bool isDead(Unit *unit) {
 }
 
 // used for the individual attacks
-std::string combat(int attacks1, int attacks2) {
+// this function is looped for each combat "round" possible in a fight
+std::string combat(int attacks1, int attacks2, bool combat_counter) {
 
 }
 
@@ -252,10 +253,13 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
     }
 
     // -------------------------------  FINISH FOR ATTACKS --------------------------
-    //do
-    //{
-        /* code */
-    //} while (/* condition */);
+    
+    bool combat_counter = true;
+
+    do
+    {
+        combat(p1_attacks, p2_attacks, combat_counter)
+    } while (combat_counter);
     
 }
 
