@@ -31,12 +31,16 @@ Whether it be leveling or battling the system should be pretty straightforward. 
 
 ### Developers
 In the source code you can import the arena/classes/characters/weapons header and cpp files and write your own main file.
-You would have add/rewrite the functions found in main but the brunt of the code is in the afformentioned files. (more text here)
+You would have add/rewrite the functions found in main but the brunt of the code is in the aforementioned files. (more text here)
 
-## Plan Log
+## Plan Log [LOOK HERE FOR STAGES OF DEVELOPMENT]
 + Binding Blade currently in development
   + all combat functions and unit statistics have been developed
-  + things like death checks and battle forecasts have not been implemented
+  + death checks and battle forecasts have been implemented [NEEDS TESTING]
+  + the code needs revisions for modularity as well as comment clean up
+  + the code needs to work with magic and various ranged weapons
+  + advanced classes need to implemented
+  + next wave of testing is being set up
 + Next two on the list are Blazing Sword and Sacred Stones
   + going to be packaged as a GBA set
   + other games will be packaged differently 
