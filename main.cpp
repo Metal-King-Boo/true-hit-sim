@@ -205,15 +205,49 @@ bool isDead(Unit *unit) {
 // this function is looped for each combat "round" possible in a fight
 // a round consists of both parties attacking, or 1 party attacking and the other dying, or 1 party attacking and the other cannot retaliate.
 // does not return anything
-void combat(int *attacks1, int *attacks2, bool *combat_counter, int *triangle_speed_crit, int p1_damage, int p2_damage) {
-    // should decrement attacks but never hit -1
+void combat(int *attacks1, int *attacks2, bool *combat_counter, int *triangle_speed_crit, int p1_damage, int p2_damage, Unit *unit, Unit *unit2) {
     
+    // player 1 swings on the enemy
+    // makes sure no value reaches zero
+    unit2->current_hp -= p1_damage;
+    if(unit2->current_hp < 0){
+        unit2->current_hp = 0;
+    }
+    // decrement attacks1
+    attacks1 --;
+    // check if the opponent died
+    if(isDead(unit2)){
+        combat_counter = false;
+        return;
+    }
+
+    // the enemy swings in retaliation
+    // makes sure no value reaches zero
+    unit->current_hp -= p2_damage;
+    if(unit->current_hp < 0){
+        unit->current_hp = 0;
+    }
+    // decrement attacks2
+    attacks2--;
+    // check if the opponent died
+    if(isDead(unit)){
+        combat_counter = false;
+        return;
+    }
+
+    // when both players have attacked and no one died this checks
+    // it will end that round of combat
+    if(attacks1 == 0 && attacks2 == 0){
+        combat_counter = false;
+        return;
+    }
     // should also account for brave weapons eventually
 }
 
 // used for the total combat scene 
 // so far only works for physical attacks and base classes
 // might make separate versions of this for different ranges or a selector
+// also need to think about magic damage
 void strike(Unit *unit, Unit *unit2, bool brave) {
     int *arr = unit->character.get_stats();
     int *arr2 = unit2->character.get_stats();
@@ -276,7 +310,7 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
     {
         int p1_damage = damage(criticalCheck(p1_battle_crit_chance), p1_attack, p2_defense);
         int p2_damage = damage(criticalCheck(p2_battle_crit_chance), p2_attack, p1_defense);
-        combat(&p1_attacks, &p2_attacks, &combat_counter, triangle_speed_crit, p1_damage, p2_damage);
+        combat(&p1_attacks, &p2_attacks, &combat_counter, triangle_speed_crit, p1_damage, p2_damage, unit, unit2);
     } while (combat_counter);
     
 }
