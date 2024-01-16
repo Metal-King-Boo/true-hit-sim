@@ -205,24 +205,39 @@ bool isDead(Unit *unit) {
 // this function is looped for each combat "round" possible in a fight
 // a round consists of both parties attacking, or 1 party attacking and the other dying, or 1 party attacking and the other cannot retaliate.
 // does not return anything
-void combat(int *attacks1, int *attacks2, bool combat_counter) {
+void combat(int *attacks1, int *attacks2, bool *combat_counter, int *triangle_speed_crit, int p1_damage, int p2_damage) {
     // should decrement attacks but never hit -1
+    
     // should also account for brave weapons eventually
 }
 
 // used for the total combat scene 
+// so far only works for physical attacks and base classes
+// might make separate versions of this for different ranges or a selector
 void strike(Unit *unit, Unit *unit2, bool brave) {
     int *arr = unit->character.get_stats();
     int *arr2 = unit2->character.get_stats();
     int p1_attacks;
     int p2_attacks;
 
+    // defines all the values used in the combat for p1
     int p1_weapon_triangle = weaponTriangle(unit->weapon.get_weapon_triangle(), unit2->weapon.get_weapon_triangle());
-    int p2_weapon_triangle = weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle());
     int p1_attack_speed = attackSpeed(arr[3], unit->weapon.get_weapon_weight(), arr[7]);
-    int p2_attack_speed = attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]);
     int p1_battle_crit_chance = battleCritChance(critChance(arr[2], unit->weapon.get_weapon_crit(), 0, unit->base.get_name()), dodgeChance(arr2[4], 0));
+    int p1_weapon_effective = weaponEffectiveness(unit->weapon.get_weapon_effective(), unit2->base.get_type(), unit2->base.get_race());
+    int p1_attack = attack(arr[1], unit->weapon.get_weapon_might(), p1_weapon_triangle, p1_weapon_effective, 0);
+
+    // defines all the values used in combat for p2
+    int p2_weapon_triangle = weaponTriangle(unit2->weapon.get_weapon_triangle(), unit->weapon.get_weapon_triangle());
+    int p2_attack_speed = attackSpeed(arr2[3], unit2->weapon.get_weapon_weight(), arr2[7]);
     int p2_battle_crit_chance = battleCritChance(critChance(arr2[2], unit2->weapon.get_weapon_crit(), 0, unit2->base.get_name()), dodgeChance(arr[4], 0));
+    int p2_weapon_effective = weaponEffectiveness(unit2->weapon.get_weapon_effective(), unit->base.get_type(), unit->base.get_race());
+    int p2_attack = attack(arr2[1], unit2->weapon.get_weapon_might(), p2_weapon_triangle, p2_weapon_effective, 0);
+
+    int p1_defense = defense(arr[5], 0, 0);
+    int p2_defense = defense(arr2[5], 0, 0);
+
+    int triangle_speed_crit[] = {p1_weapon_triangle, p1_attack_speed, p1_battle_crit_chance, p2_weapon_triangle, p2_attack_speed, p2_battle_crit_chance};
 
     // gives the attack counts for each person in combat
     // the first if statement matches for when unit 1 is faster than unit 2
@@ -259,7 +274,9 @@ void strike(Unit *unit, Unit *unit2, bool brave) {
 
     do
     {
-        combat(&p1_attacks, &p2_attacks, combat_counter);
+        int p1_damage = damage(criticalCheck(p1_battle_crit_chance), p1_attack, p2_defense);
+        int p2_damage = damage(criticalCheck(p2_battle_crit_chance), p2_attack, p1_defense);
+        combat(&p1_attacks, &p2_attacks, &combat_counter, triangle_speed_crit, p1_damage, p2_damage);
     } while (combat_counter);
     
 }
